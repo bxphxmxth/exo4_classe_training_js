@@ -25,7 +25,15 @@ class Personne{
                 arrivee.personnes.push(this);
                 depart.personnes.splice(depart.personnes.indexOf(this,1));
                 console.log(`je vais à pieds`);
-            }else if(transport)
+            }else if(transport.embarquer(this) == true){
+                arrivee.personnes.push(this);
+                depart.personnes.splice(depart.personnes.indexOf(this,1));
+                console.log("vé en bus");
+            }else{
+                arrivee.personnes.push(this);
+                depart.personnes.splice(depart.personnes.indexOf(this,1));
+                console.log("g pas assez jvé pas en bus");
+            }
 
         }
     }
@@ -48,6 +56,9 @@ class Bus{
                 this.personnes.splice(this.personnes.indexOf(passager,1));
                 console.log("jss ds lbus");
                 return true;
+            }else{
+                console.log("no money honey sorry");
+                return false;
             }
         }
 
@@ -57,13 +68,37 @@ class Bus{
 // ### Créez une instance de Bus. 
 
 let bus = new Bus([],0);
+bus.embarquer(naz);
+
 // ### 8h00 Vous êtes à la maison.
+maison.personnes.push(naz);
+console.log(maison);
 // ### 8h30 Vous prennez le bus vers MolenGeek.
+
+naz.seDeplacer(maison,molengeek,bus);
+console.log(`je prends le bus pour aller à molengeek`);
+
 // ### 8h45 Vous êtes à MolenGeek.
+
 // ### 12h45 Vous sortez de MolenGeek, vous prenez le bus pour aller au snack.
+
+naz.seDeplacer(molengeek,snack,bus);
+console.log(`je prends le bus pour aller manger un durum falafel au snack`);
+console.log(snack);
+
 // ### 13h30 Vous sortez du snack, et vous rentrer pied à MolenGeek pour digérer.
+
+naz.seDeplacer(snack,molengeek,"pieds");
+console.log(snack);
+console.log(molengeek);
+
 // ### 17h10 Vous sortez de MolenGeek, vous prenez le bus pour rentrer chez vous.
+
+naz.seDeplacer(molengeek,maison,bus)
+console.log("vé en bus chez wam");
 
 // ### Faites un console.log() de votre argent, ainsi que l'argent du Bus(modifié)
 
+console.log(naz.argent);
+console.log(bus.caisse);
 
